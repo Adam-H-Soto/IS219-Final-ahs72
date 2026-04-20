@@ -11,4 +11,4 @@ Built using spec-driven development with Claude Code.
 
 ## Links
 - **GitHub:** https://github.com/Adam-H-Soto
-- **LinkedIn:** https://www.linkedin.com/in/adam-soto
+- **LinkedIn:** https://www.linkedin.com/in/adam-soto-909586327/
