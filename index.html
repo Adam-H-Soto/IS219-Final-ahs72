@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adam Soto — Applied AI Engineering</title>
+  <meta name="description" content="Portfolio of Adam Soto, Applied AI Engineering student building data-driven tools with Python, AI APIs, and interactive visualization." />
+
+  <!-- Google Fonts: Lora, DM Sans, DM Mono — NFR-03 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation — FR-06, FR-07, T-05, T-06 -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo">AS<span class="nav__logo-dot">.</span></a>
+      <ul class="nav__links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact" class="nav__cta">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section — FR-01, CR-01, T-08 through T-15 -->
+  <section id="hero" class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__inner">
+
+      <div class="hero__text">
+        <p class="hero__eyebrow animate-fadeup" style="--delay: 0s">
+          <span class="eyebrow__line" aria-hidden="true"></span>
+          Applied AI Engineering Student
+        </p>
+        <h1 class="hero__name animate-fadeup" style="--delay: 0.15s">
+          Adam <em>Soto</em>
+        </h1>
+        <p class="hero__subtitle animate-fadeup" style="--delay: 0.3s">
+          I build data tools that make the complex feel simple — now with AI.
+        </p>
+        <p class="hero__statement animate-fadeup" style="--delay: 0.45s">
+          From economic dashboards to AI-powered insight engines, I turn messy datasets
+          into interfaces people actually want to use.
+        </p>
+        <div class="hero__ctas animate-fadeup" style="--delay: 0.6s">
+          <a href="#projects" class="btn btn--primary">View My Work</a>
+          <a href="https://github.com/Adam-H-Soto" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
+            GitHub Profile
+          </a>
+        </div>
+      </div>
+
+      <!-- Decorative data viz card — T-14 -->
+      <div class="hero__visual animate-fadein" style="--delay: 0.8s" aria-hidden="true">
+        <div class="viz-card">
+          <div class="viz-card__header">
+            <span class="viz-card__label">USA Standard of Living</span>
+            <span class="viz-card__pulse"></span>
+          </div>
+          <div class="viz-card__chart">
+            <div class="chart-bars">
+              <div class="chart-bar" style="--h: 55%"><span>CA</span></div>
+              <div class="chart-bar" style="--h: 72%"><span>NY</span></div>
+              <div class="chart-bar" style="--h: 48%"><span>TX</span></div>
+              <div class="chart-bar" style="--h: 83%"><span>WA</span></div>
+              <div class="chart-bar" style="--h: 61%"><span>CO</span></div>
+              <div class="chart-bar chart-bar--highlight" style="--h: 90%"><span>MA</span></div>
+              <div class="chart-bar" style="--h: 44%"><span>FL</span></div>
+            </div>
+            <div class="chart-metric">
+              <span class="chart-metric__value">47</span>
+              <span class="chart-metric__label">States Mapped</span>
+            </div>
+          </div>
+          <div class="viz-card__footer">
+            <span class="viz-tag">Python</span>
+            <span class="viz-tag">AI</span>
+            <span class="viz-tag">D3</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About Section — FR-02, CR-02, T-16 through T-18 -->
+  <section id="about" class="about">
+    <div class="section__inner">
+      <div class="about__grid">
+
+        <div class="about__left">
+          <p class="section__eyebrow">
+            <span class="eyebrow__line" aria-hidden="true"></span>
+            About
+          </p>
+          <h2 class="section__heading">Builder.<br>Analyst.<br>Always curious.</h2>
+          <div class="about__stats">
+            <div class="stat-tile">
+              <span class="stat-tile__number">2</span>
+              <span class="stat-tile__label">Live Projects</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-tile__number">47</span>
+              <span class="stat-tile__label">States Analyzed</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-tile__number">AI</span>
+              <span class="stat-tile__label">First Approach</span>
+            </div>
+            <div class="stat-tile">
+              <span class="stat-tile__number">∞</span>
+              <span class="stat-tile__label">Datasets to Explore</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about__right">
+          <p>
+            I'm an Applied AI Engineering student with a passion for turning raw, complex data
+            into tools that feel intuitive. My work sits at the intersection of data engineering,
+            AI integration, and interactive visualization — building things that not only work,
+            but communicate.
+          </p>
+          <p>
+            My current focus is on economic and public policy data: how do we take the sprawling
+            complexity of cost-of-living, income, and opportunity across the United States and
+            make it legible? The USA Standard of Living Explorer was my first answer to that
+            question. EconLens is the next one — AI-native from the ground up.
+          </p>
+          <p>
+            I'm looking for a junior role at a company that cares about the quality of its
+            data products. If you need someone who can wire a Python data pipeline to an AI API
+            and ship it as something a non-technical stakeholder can actually use — let's talk.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section — FR-03, FR-04, CR-03, CR-04, T-19 through T-26 -->
+  <section id="projects" class="projects">
+    <div class="section__inner">
+      <p class="section__eyebrow">
+        <span class="eyebrow__line" aria-hidden="true"></span>
+        Projects
+      </p>
+      <h2 class="section__heading">Things I've built.</h2>
+
+      <div class="projects__grid">
+
+        <!-- Project 1: USA Standard of Living Explorer -->
+        <article class="project-card">
+          <div class="project-card__visual project-card__visual--teal" aria-hidden="true">
+            <div class="map-visual">
+              <div class="map-dot" style="top:35%;left:15%"></div>
+              <div class="map-dot map-dot--large" style="top:55%;left:25%"></div>
+              <div class="map-dot" style="top:25%;left:60%"></div>
+              <div class="map-dot map-dot--large map-dot--bright" style="top:20%;left:78%"></div>
+              <div class="map-dot" style="top:65%;left:50%"></div>
+              <div class="map-dot" style="top:45%;left:70%"></div>
+              <div class="map-dot map-dot--large" style="top:70%;left:80%"></div>
+              <div class="map-line" style="top:35%;left:15%;width:14%;transform:rotate(30deg)"></div>
+              <div class="map-line" style="top:25%;left:60%;width:20%;transform:rotate(-10deg)"></div>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-badge project-badge--live">Live on Vercel</span>
+            </div>
+            <h3 class="project-card__title">USA Standard of Living Explorer</h3>
+            <p class="project-card__desc">
+              An interactive data dashboard mapping cost-of-living, income, and quality-of-life
+              metrics across all 47 analyzed US states. Built to make dense economic data
+              scannable and comparable for everyday decision-making.
+            </p>
+            <div class="project-card__tags">
+              <span class="tag">Python</span>
+              <span class="tag">Data Viz</span>
+              <span class="tag">Vercel</span>
+              <span class="tag">Interactive</span>
+            </div>
+            <a href="https://student-reality-lab-soto.vercel.app/" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
+              View Live Project
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 2: EconLens -->
+        <article class="project-card">
+          <div class="project-card__visual project-card__visual--dark" aria-hidden="true">
+            <div class="network-visual">
+              <div class="node node--center"></div>
+              <div class="node" style="top:20%;left:20%"></div>
+              <div class="node" style="top:15%;left:65%"></div>
+              <div class="node" style="top:70%;left:15%"></div>
+              <div class="node node--bright" style="top:65%;left:70%"></div>
+              <div class="node" style="top:45%;left:82%"></div>
+              <svg class="network-edges" aria-hidden="true">
+                <line x1="50%" y1="50%" x2="20%" y2="20%" />
+                <line x1="50%" y1="50%" x2="65%" y2="15%" />
+                <line x1="50%" y1="50%" x2="15%" y2="70%" />
+                <line x1="50%" y1="50%" x2="70%" y2="65%" />
+                <line x1="50%" y1="50%" x2="82%" y2="45%" />
+              </svg>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="project-badge project-badge--dev">In Development</span>
+            </div>
+            <h3 class="project-card__title">EconLens</h3>
+            <p class="project-card__desc">
+              An AI-powered economic insight tool that lets users query, compare, and interpret
+              macroeconomic data in plain language. Connects live datasets to a Claude-backed
+              reasoning layer — ask a question, get an answer with sources.
+            </p>
+            <div class="project-card__tags">
+              <span class="tag">Claude API</span>
+              <span class="tag">Python</span>
+              <span class="tag">AI</span>
+              <span class="tag">Economics</span>
+            </div>
+            <span class="btn btn--outline btn--sm btn--disabled" aria-disabled="true">Coming Soon</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section — FR-04, FR-05, CR-05, T-27 through T-30 -->
+  <section id="skills" class="skills">
+    <div class="section__inner">
+      <p class="section__eyebrow section__eyebrow--light">
+        <span class="eyebrow__line eyebrow__line--light" aria-hidden="true"></span>
+        Skills
+      </p>
+      <h2 class="section__heading section__heading--light">What I work with.</h2>
+
+      <div class="skills__grid">
+
+        <div class="skill-group">
+          <h3 class="skill-group__title">Languages &amp; Data</h3>
+          <ul class="skill-group__list" role="list">
+            <li>Python</li>
+            <li>SQL</li>
+            <li>JavaScript</li>
+            <li>HTML / CSS</li>
+            <li>Pandas &amp; NumPy</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3 class="skill-group__title">AI &amp; ML Tools</h3>
+          <ul class="skill-group__list" role="list">
+            <li>Claude API (Anthropic)</li>
+            <li>OpenAI API</li>
+            <li>Prompt Engineering</li>
+            <li>RAG Pipelines</li>
+            <li>LangChain</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3 class="skill-group__title">Deployment &amp; Tooling</h3>
+          <ul class="skill-group__list" role="list">
+            <li>Vercel</li>
+            <li>GitHub Pages</li>
+            <li>Git &amp; GitHub</li>
+            <li>VS Code + Claude Code</li>
+            <li>REST APIs</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section — FR-05, FR-08, FR-09, T-31 through T-35 -->
+  <section id="contact" class="contact">
+    <div class="section__inner section__inner--narrow">
+      <p class="section__eyebrow">
+        <span class="eyebrow__line" aria-hidden="true"></span>
+        Contact
+      </p>
+      <h2 class="section__heading">Let's build something.</h2>
+      <p class="contact__statement">
+        <em>I'm actively looking for junior AI/data engineering roles. If you're building
+        something interesting with data or AI, I'd genuinely love to hear about it.</em>
+      </p>
+      <div class="contact__links">
+        <a href="https://github.com/Adam-H-Soto" class="btn btn--primary btn--lg" target="_blank" rel="noopener noreferrer">
+          View GitHub Profile
+        </a>
+        <a href="https://www.linkedin.com/in/adam-soto" class="btn btn--outline btn--lg" target="_blank" rel="noopener noreferrer">
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer — CR-06, T-36 -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__name">Adam Soto</span>
+      <span class="footer__tagline">Applied AI Engineering · 2025</span>
+    </div>
+  </footer>
+
+</body>
+</html>
