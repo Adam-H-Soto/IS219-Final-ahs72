@@ -2,7 +2,8 @@
 
 Professional portfolio for Adam Soto, Applied AI Engineering student.
 
-Built using spec-driven development with Claude Code.
+## Live Site
+🔗 https://adam-h-soto.github.io/IS219-Final-ahs72/
 
 ## Spec Documents
 - [`specs/requirements.md`](specs/requirements.md) — Functional, content, and non-functional requirements
