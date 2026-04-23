@@ -48,7 +48,7 @@ A single-page professional portfolio website for Adam Soto, an Applied AI Engine
 | CR-02  | Hero kicker line: `// currently: at a computer · ideally: not at a computer`|
 | CR-03  | Hero right column must show three tilted status cards (current project, in dev, open to roles) |
 | CR-04  | About section heading: "Human first. Engineer second."                      |
-| CR-05  | About stat tiles must include: states analyzed, spec docs before first commit, chocolate opinions, nonchalance willingness |
+| CR-05  | About stat tiles must include: states analyzed, AI projects without a spec (0), chocolate opinions, nonchalance willingness |
 | CR-06  | About body copy must reference NJIT education, spec-driven development methodology, and going outside |
 | CR-07  | Project 1 must link to https://student-reality-lab-soto.vercel.app/        |
 | CR-08  | Project 1 hover quip: `// 50 states. 0 spreadsheets required.`             |

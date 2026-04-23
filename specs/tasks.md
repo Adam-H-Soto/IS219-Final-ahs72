@@ -62,7 +62,7 @@ Check off each task as completed. Every task references the requirement or desig
 - [x] **T-31** — Style two-column about grid (`1fr / 1.5fr`), gap 5rem → Design §2.2
 - [x] **T-32** — Add section number "02 — About" and `<h2>` heading: "Human first. Engineer second." → CR-04, Design §3
 - [x] **T-33** — Build 2×2 `.stat-cluster` grid with four stat tiles → FR-02, CR-05
-- [x] **T-34** — Stat tile content: "50 States analyzed", "3 Spec docs before first commit", "∞ Opinions on chocolate", "0 Willingness to be nonchalant" → CR-05, Design §5
+- [x] **T-34** — Stat tile content: "50 States analyzed", "0 AI projects started without a spec", "∞ Opinions on chocolate", "0 Willingness to be nonchalant" → CR-05, Design §5
 - [x] **T-35** — Apply intentional margin-top offsets to stat tiles #2 (`1.5rem`) and #4 (`-0.75rem`) → Design §2.3
 - [x] **T-36** — Write four about body paragraphs: NJIT education + Dean's Scholar, spec-driven methodology with /specs reference, outside/leadership/internship, role aspiration → CR-06
 
