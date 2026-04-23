@@ -195,7 +195,48 @@ Animation uses CSS custom property `--delay` on each element.
 
 ---
 
-## 5. Personality Layer — Design Decisions
+## 5. Scrollytelling System
+
+### 5.1 Scroll Progress Bar
+
+- `position: fixed; top: 0; left: 0` — sits at the very top of the viewport
+- `height: 2px`, `background: var(--rust)` (jade green)
+- `z-index: 200` — above the nav
+- Width driven by `window.scrollY / (scrollHeight - innerHeight)` on scroll event
+
+### 5.2 Reveal Animation
+
+| Property  | Value                                      |
+|-----------|--------------------------------------------|
+| Initial   | `opacity: 0; transform: translateY(28px)`  |
+| Triggered | `opacity: 1; transform: translateY(0)`     |
+| Easing    | `cubic-bezier(0.16, 1, 0.3, 1)` (snappy ease-out) |
+| Duration  | `0.65s`                                    |
+| Trigger   | `IntersectionObserver`, threshold `0.12`   |
+| Fires     | Once — element unobserved after reveal     |
+
+### 5.3 Stagger Timing
+
+| Group          | Base delay | Step   |
+|----------------|------------|--------|
+| Stat tiles     | 0ms        | 130ms  |
+| About body `p` | 0ms        | 100ms  |
+| Project cards  | 0ms        | 180ms  |
+| Opinion items  | 0ms        | 140ms  |
+| Skill groups   | 0ms        | 150ms  |
+| Section labels | 0ms        | —      |
+| Section headings| 100ms     | —      |
+
+### 5.4 Stat Countup
+
+- Applies only to numeric stats with value > 0 (i.e. "50")
+- Duration: 1400ms, easing: cubic ease-out
+- Decimal stats (e.g. future use) render with `.toFixed(2)`
+- Non-numeric and zero stats (∞, 0) skip countup and just reveal
+
+---
+
+## 6. Personality Layer — Design Decisions
 
 | Element              | Location          | Content                                                          |
 |----------------------|-------------------|------------------------------------------------------------------|

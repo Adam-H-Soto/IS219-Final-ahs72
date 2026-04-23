@@ -63,6 +63,19 @@ A single-page professional portfolio website for Adam Soto, an Applied AI Engine
 
 ---
 
+## 4b. Scrollytelling Requirements
+
+| ID     | Requirement                                                                 |
+|--------|-----------------------------------------------------------------------------|
+| SR-01  | A scroll progress bar must appear at the top of the nav, tracking page position |
+| SR-02  | All section content below the hero must reveal via scroll-triggered animation |
+| SR-03  | Grouped elements (stat tiles, opinion items, skill groups, project cards) must reveal with staggered delays |
+| SR-04  | The "50 states" stat tile must animate its number counting up on scroll entry |
+| SR-05  | All scroll behavior must use vanilla JS only — IntersectionObserver + scroll event |
+| SR-06  | Scroll animations must fire once and not repeat on scroll back              |
+
+---
+
 ## 5. Non-Functional Requirements
 
 | ID      | Requirement                                                                |

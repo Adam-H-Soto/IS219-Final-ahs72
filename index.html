@@ -714,6 +714,30 @@
       letter-spacing: 0.06em;
     }
 
+    /* ── SCROLL PROGRESS ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--rust);
+      width: 0%;
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    /* ── SCROLL REVEALS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(16px); }
@@ -788,6 +812,7 @@
 -->
 
   <nav>
+    <div class="scroll-progress" id="scroll-progress"></div>
     <a class="nav-logo" href="#top">Adam Soto</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
@@ -1083,11 +1108,88 @@
   </footer>
 
   <script>
+    // ── CONSOLE EASTER EGG ──
     console.log('%c Hey.', 'font-size:1.5rem; font-weight:bold; color:#3aaa6e; font-family:serif;');
     console.log('%c You opened the console. Respect.', 'font-size:0.9rem; color:#4a4038;');
     console.log('%c If you\'re hiring — find me on LinkedIn or GitHub.', 'font-size:0.85rem; color:#3aaa6e; font-style:italic;');
     console.log('%c If you\'re my professor — the specs are in /specs. Hi.', 'font-size:0.8rem; color:#9a8f85;');
     console.log('%c (also: one piece of chocolate a day. trust me.)', 'font-size:0.75rem; color:#3aaa6e; font-style:italic;');
+
+    // ── SCROLL PROGRESS BAR ──
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      progressBar.style.width = `${Math.min(pct * 100, 100)}%`;
+    }, { passive: true });
+
+    // ── SCROLL REVEALS ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const delay = parseInt(entry.target.dataset.delay || 0);
+        setTimeout(() => entry.target.classList.add('revealed'), delay);
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.12 });
+
+    function revealEls(selector, baseDelay = 0, stagger = 0) {
+      document.querySelectorAll(selector).forEach((el, i) => {
+        el.classList.add('reveal');
+        el.dataset.delay = baseDelay + i * stagger;
+        revealObserver.observe(el);
+      });
+    }
+
+    // Section labels + headings
+    revealEls('.about .section-number, .projects .section-number, .opinions .section-number, .skills .section-number, .contact .section-number');
+    revealEls('.about .section-heading, .projects .section-heading, .opinions .section-heading, .skills .section-heading, .contact .section-heading', 100);
+
+    // About
+    revealEls('.stat', 0, 130);
+    revealEls('.about-body p', 0, 100);
+
+    // Projects
+    revealEls('.project-card', 0, 180);
+
+    // Opinions
+    revealEls('.opinion-item', 0, 140);
+
+    // Skills
+    revealEls('.skill-group', 0, 150);
+
+    // Contact
+    revealEls('.contact-statement', 0);
+    revealEls('.contact-links', 120);
+    revealEls('.contact-irony', 220);
+
+    // ── STAT COUNTUP ──
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const numEl = entry.target.querySelector('.stat-num');
+        if (!numEl) return;
+        const raw = numEl.textContent.trim();
+        const target = parseFloat(raw);
+        if (isNaN(target) || target === 0) return;
+        const isDecimal = raw.includes('.');
+        const duration = 1400;
+        let startTs = null;
+        const tick = (ts) => {
+          if (!startTs) startTs = ts;
+          const p = Math.min((ts - startTs) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          numEl.textContent = isDecimal
+            ? (eased * target).toFixed(2)
+            : Math.floor(eased * target);
+          if (p < 1) requestAnimationFrame(tick);
+          else numEl.textContent = raw;
+        };
+        requestAnimationFrame(tick);
+        countObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat').forEach(el => countObserver.observe(el));
   </script>
 
 </body>

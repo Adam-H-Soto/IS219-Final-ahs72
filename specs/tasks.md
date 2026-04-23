@@ -146,7 +146,20 @@ Check off each task as completed. Every task references the requirement or desig
 
 ---
 
-## Group 11: Final QA
+## Group 11: Scrollytelling
+
+- [x] **T-90** — Add `.scroll-progress` CSS: `position: fixed; top: 0; height: 2px; background: var(--rust); z-index: 200` → SR-01
+- [x] **T-91** — Add `#scroll-progress` element inside `<nav>` → SR-01
+- [x] **T-92** — Add scroll event listener to drive progress bar width from `scrollY / scrollHeight` → SR-01
+- [x] **T-93** — Add `.reveal` CSS class: `opacity: 0; translateY(28px)`, transition `0.65s cubic-bezier(0.16,1,0.3,1)` → SR-02
+- [x] **T-94** — Add `.reveal.revealed` CSS: `opacity: 1; translateY(0)` → SR-02
+- [x] **T-95** — Set up `IntersectionObserver` (threshold 0.12) to add `.revealed` class on scroll entry, unobserve after firing → SR-02, SR-06
+- [x] **T-96** — Apply `.reveal` + staggered `data-delay` to: section labels, section headings, stat tiles, about body paragraphs, project cards, opinion items, skill groups, contact blocks → SR-02, SR-03
+- [x] **T-97** — Add stat countup: second `IntersectionObserver` (threshold 0.5) animates numeric stat values > 0 over 1400ms with cubic ease-out → SR-04
+
+---
+
+## Group 13: Final QA
 
 - [ ] **T-76** — Open in Chrome: verify all sections render, all links work → NFR-06
 - [ ] **T-77** — Open in Firefox: verify layout consistency → NFR-06
