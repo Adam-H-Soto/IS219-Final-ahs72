@@ -81,8 +81,8 @@ Check off each task as completed. Every task references the requirement or desig
 - [x] **T-45** — **Project 1:** "Live ↗" badge, tags (Python, Data Viz, Interactive, Vercel) → FR-03
 - [x] **T-46** — **Project 2:** dark gradient visual, mini network node visualization → CR-09
 - [x] **T-47** — **Project 2:** use `<div>` (not `<a>`), "In dev" badge, "Coming soon" muted link → CR-09
-- [x] **T-48** — **Project 2:** hover quip: `// because charts don't explain themselves.` → CR-10
-- [x] **T-49** — **Project 2:** tags (Claude API, Python, Streamlit, LLM) → FR-03
+- [x] **T-48** — **Project 2:** hover quip: `// 4 seasons. 1 board. 0 mercy.` → CR-10
+- [x] **T-49** — **Project 2:** tags (Unity, C#, 2D, Board Game) → FR-03
 
 ---
 

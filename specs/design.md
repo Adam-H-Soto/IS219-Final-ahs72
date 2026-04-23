@@ -211,7 +211,7 @@ Animation uses CSS custom property `--delay` on each element.
 | Contact irony        | Contact           | Monospaced closing note about going outside                     |
 | Footer tagline       | Footer            | `currently: probably outside`                                   |
 | Project quip #1      | Project card 1    | `// 50 states. 0 spreadsheets required.`                        |
-| Project quip #2      | Project card 2    | `// because charts don't explain themselves.`                   |
+| Project quip #2      | Project card 2    | `// 4 seasons. 1 board. 0 mercy.`                               |
 | Console easter egg   | `<script>`        | 5 styled `console.log` lines, ends with chocolate opinion       |
 
 ---

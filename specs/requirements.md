@@ -52,8 +52,8 @@ A single-page professional portfolio website for Adam Soto, an Applied AI Engine
 | CR-06  | About body copy must reference NJIT education, spec-driven development methodology, and going outside |
 | CR-07  | Project 1 must link to https://student-reality-lab-soto.vercel.app/        |
 | CR-08  | Project 1 hover quip: `// 50 states. 0 spreadsheets required.`             |
-| CR-09  | Project 2 (EconLens) must be marked "In dev" with no broken links          |
-| CR-10  | Project 2 hover quip: `// because charts don't explain themselves.`        |
+| CR-09  | Project 2 (Solsticij) must be marked "In dev" with no broken links         |
+| CR-10  | Project 2 hover quip: `// 4 seasons. 1 board. 0 mercy.`                    |
 | CR-11  | Opinions section must include all three personal opinions verbatim          |
 | CR-12  | Each opinion must have a deadpan Azeret Mono aside comment below it        |
 | CR-13  | Skills grouped into: Languages & Data, AI & ML, Tools & Deployment         |
