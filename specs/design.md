@@ -204,6 +204,7 @@ Animation uses CSS custom property `--delay` on each element.
 | HTML comment         | Top of `<body>`   | Greeting for source readers; references /specs                  |
 | Nav logo hover       | Nav               | Reveals "(please hire me)" in jade below the logo              |
 | Hero kicker          | Hero              | `// currently: at a computer · ideally: not at a computer`      |
+| Stat tile #2         | About             | "3 — Spec docs before first commit"                             |
 | Stat tile #3         | About             | "∞ — Opinions on chocolate"                                     |
 | Stat tile #4         | About             | "0 — Willingness to be nonchalant"                              |
 | Section 04           | Opinions          | Three personal opinions with deadpan mono asides                |
