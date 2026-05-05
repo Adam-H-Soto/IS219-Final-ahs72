@@ -321,13 +321,6 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
     .stat-cluster {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -874,17 +867,26 @@
     .btn.btn-sm { font-size: 0.75rem; padding: 0.5rem 1rem; }
 
     /* ── ABOUT PORTRAIT ── */
-    .about-grid { position: relative; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: start;
+      position: relative;
+      padding-right: 200px;
+    }
 
     .about-grid > div { position: relative; z-index: 1; }
 
     .about__portrait {
       position: absolute;
-      right: -4rem;
-      bottom: 0;
-      width: 280px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 240px;
       pointer-events: none;
       z-index: 0;
+      overflow: hidden;
     }
 
     .portrait__frame { position: relative; width: 100%; }
