@@ -3,317 +3,1368 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adam Soto — Applied AI Engineering</title>
-  <meta name="description" content="Portfolio of Adam Soto, Applied AI Engineering student building data-driven tools with Python, AI APIs, and interactive visualization." />
-
-  <!-- Google Fonts: Lora, DM Sans, DM Mono — NFR-03 -->
+  <title>Adam Soto — Applied AI Engineer (who'd rather be outside)</title>
+  <meta name="description" content="Portfolio of Adam Soto. Data tools. AI pipelines. Strong opinions about chocolate." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Epilogue:wght@300;400;500;700;900&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #f7f3ec;
+      --paper-dark: #ede8df;
+      --ink: #1c1814;
+      --ink-mid: #4a4038;
+      --ink-faint: #9a8f85;
+      --rust: #3aaa6e;
+      --rust-pale: #c8e8d6;
+      --forest: #2d5a3d;
+      --forest-pale: #d4e8da;
+      --gold: #c9962a;
+      --gold-pale: #f5e9cc;
+      --border: #d8d0c4;
+      --shadow: rgba(28,24,20,0.07);
+    }
 
-  <link rel="stylesheet" href="style.css" />
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Epilogue', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.35;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 99;
+      padding: 1.2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(247,243,236,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem;
+      color: var(--ink);
+      text-decoration: none;
+      position: relative;
+    }
+
+    .nav-logo::after {
+      content: '(please hire me)';
+      position: absolute;
+      left: 0;
+      top: 100%;
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--rust);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+    }
+
+    .nav-logo:hover::after { opacity: 1; transform: translateY(4px); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--rust); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding: 9rem 3rem 5rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '01';
+      position: absolute;
+      top: 7rem;
+      right: -1rem;
+      font-family: 'Instrument Serif', serif;
+      font-size: 16rem;
+      color: var(--border);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rust);
+      border: 1px solid var(--rust);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: slideIn 0.6s ease forwards 0.1s;
+    }
+
+    .hero-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      line-height: 1.0;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      animation: slideIn 0.6s ease forwards 0.2s;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--rust);
+    }
+
+    .hero-headline {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 0.6rem;
+      opacity: 0;
+      animation: slideIn 0.6s ease forwards 0.35s;
+    }
+
+    .hero-headline strong { font-weight: 700; color: var(--ink); }
+
+    .hero-kicker {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: slideIn 0.6s ease forwards 0.45s;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-kicker span { color: var(--rust); }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: slideIn 0.6s ease forwards 0.55s;
+    }
+
+    .btn {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1.5px solid transparent;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-dark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .btn-dark:hover { background: var(--rust); border-color: var(--rust); }
+
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--border); }
+    .btn-ghost:hover { border-color: var(--ink); }
+
+    /* Hero right — tilted card stack */
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeIn 0.9s ease forwards 0.7s;
+    }
+
+    .hero-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 4px 4px 0 var(--border);
+      position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .hero-card:nth-child(1) { transform: rotate(-1.3deg); }
+    .hero-card:nth-child(2) { transform: rotate(0.9deg); margin-left: 1.5rem; }
+    .hero-card:nth-child(3) { transform: rotate(-0.4deg); margin-left: 0.5rem; }
+    .hero-card:hover { transform: rotate(0deg) translateY(-3px); box-shadow: 6px 6px 0 var(--rust-pale); z-index: 2; }
+
+    .card-dot {
+      position: absolute;
+      top: 1.1rem; right: 1.1rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-live { background: var(--forest); animation: pulse 2s ease-in-out infinite; }
+    .dot-wip  { background: var(--gold); }
+
+    .card-label {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.35rem;
+    }
+
+    .card-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .card-sub {
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      margin-top: 0.2rem;
+    }
+
+    /* ── SHARED SECTION ── */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+    }
+
+    .section-number {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-number::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 2.5rem;
+      background: var(--border);
+    }
+
+    .section-heading {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 3rem;
+    }
+
+    .section-heading em { font-style: italic; color: var(--rust); }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--paper-dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .stat-cluster {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--paper);
+    }
+
+    .stat:nth-child(2) { margin-top: 1.5rem; }
+    .stat:nth-child(4) { margin-top: -0.75rem; }
+
+    .stat-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.25rem;
+      color: var(--rust);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      line-height: 1.4;
+    }
+
+    .about-body p {
+      font-size: 1rem;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-body strong { color: var(--ink); font-weight: 600; }
+    .about-body em { font-style: italic; }
+
+    /* ── PROJECTS ── */
+    .projects { background: var(--paper); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: white;
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px var(--shadow);
+    }
+
+    .project-quip {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.65rem 1.25rem;
+      transform: translateY(100%);
+      transition: transform 0.25s ease;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+
+    .project-card:hover .project-quip { transform: translateY(0); }
+
+    .project-visual {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pv-teal { background: linear-gradient(140deg, var(--forest) 0%, #1e3d2a 100%); }
+    .pv-dark { background: linear-gradient(140deg, #1a1f2e 0%, #2a1f0e 100%); }
+
+    .project-visual-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1.5rem 2.5rem;
+    }
+
+    .mini-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 100px;
+      width: 100%;
+    }
+
+    .mini-bar {
+      flex: 1;
+      border-radius: 2px 2px 0 0;
+      background: rgba(255,255,255,0.15);
+      position: relative;
+    }
+
+    .mini-bar span {
+      position: absolute;
+      bottom: -1.3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.52rem;
+      color: rgba(255,255,255,0.45);
+      white-space: nowrap;
+    }
+
+    .mini-bar:nth-child(1) { height: 50%; }
+    .mini-bar:nth-child(2) { height: 75%; background: rgba(255,255,255,0.3); }
+    .mini-bar:nth-child(3) { height: 55%; }
+    .mini-bar:nth-child(4) { height: 92%; background: #e8a85a; }
+    .mini-bar:nth-child(5) { height: 60%; }
+    .mini-bar:nth-child(6) { height: 80%; background: rgba(255,255,255,0.25); }
+    .mini-bar:nth-child(7) { height: 42%; }
+
+    .mini-network {
+      width: 140px;
+      height: 110px;
+      position: relative;
+    }
+
+    .net-node {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(200,150,58,0.6);
+      transform: translate(-50%,-50%);
+    }
+
+    .net-node.hub {
+      width: 20px; height: 20px;
+      top: 50%; left: 50%;
+      background: #e8a85a;
+    }
+
+    .net-node.s { width: 10px; height: 10px; }
+
+    .project-badge {
+      position: absolute;
+      top: 0.8rem; right: 0.8rem;
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      background: rgba(0,0,0,0.3);
+      color: white;
+      backdrop-filter: blur(4px);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .ptag {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.2rem 0.5rem;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      color: var(--ink-faint);
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    .project-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.3rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      line-height: 1.25;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .project-link {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--forest);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: gap 0.2s;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    .project-link:hover { gap: 0.6rem; }
+    .project-link.muted { color: var(--ink-faint); }
+
+    .projects-grid .project-card:nth-child(2) { margin-top: 3rem; }
+
+    /* ── OPINIONS ── */
+    .opinions { background: var(--ink); }
+
+    .opinions .section-wrap { padding: 6rem 3rem; }
+    .opinions .section-number { color: rgba(247,243,236,0.25); }
+    .opinions .section-number::after { background: rgba(247,243,236,0.12); }
+    .opinions .section-heading { color: var(--paper); }
+
+    .opinions-intro {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.72rem;
+      color: rgba(247,243,236,0.35);
+      letter-spacing: 0.04em;
+      margin-top: -2.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .opinion-list { display: flex; flex-direction: column; }
+
+    .opinion-item {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(247,243,236,0.07);
+      transition: background 0.2s;
+    }
+
+    .opinion-item:last-child { border-bottom: none; }
+
+    .opinion-num {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--rust);
+      letter-spacing: 0.1em;
+      padding-top: 0.4rem;
+    }
+
+    .opinion-text {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      line-height: 1.5;
+      color: var(--paper);
+    }
+
+    .opinion-aside {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(247,243,236,0.3);
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── SKILLS ── */
+    .skills {
+      background: var(--paper-dark);
+      border-top: 1px solid var(--border);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-group {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--paper);
+    }
+
+    .skill-group:nth-child(2) { margin-top: 1.5rem; }
+    .skill-group:nth-child(3) { margin-top: 3rem; }
+
+    .skill-group-title {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rust);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .skill-list li {
+      font-size: 0.875rem;
+      color: var(--ink-mid);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-list li::before { content: '—'; color: var(--border); font-size: 0.7rem; }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner { max-width: 680px; }
+
+    .contact-statement {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      font-style: italic;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-irony {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+      border-left: 2px solid var(--border);
+      padding-left: 1rem;
+      line-height: 1.9;
+    }
+
+    .contact-irony span { color: var(--rust); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 0.95rem;
+      color: rgba(247,243,236,0.55);
+    }
+
+    .footer-mono {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.62rem;
+      color: rgba(247,243,236,0.22);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--rust);
+      width: 0%;
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    /* ── SCROLL REVEALS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 7rem 1.5rem 4rem;
+        gap: 3rem;
+      }
+
+      .hero::before { display: none; }
+
+      .hero-right {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 0.75rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .hero-card { min-width: 220px; flex-shrink: 0; }
+      .hero-card:nth-child(1),
+      .hero-card:nth-child(2),
+      .hero-card:nth-child(3) { transform: none; margin-left: 0; }
+
+      .section-wrap { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stat:nth-child(2), .stat:nth-child(4) { margin-top: 0; }
+
+      .projects-grid { grid-template-columns: 1fr; }
+      .projects-grid .project-card:nth-child(2) { margin-top: 0; }
+
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-group:nth-child(2),
+      .skill-group:nth-child(3) { margin-top: 0; }
+
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; padding: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-name { font-size: 3rem; }
+      .hero-right { display: none; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.72rem; }
+      .opinion-item { grid-template-columns: 2rem 1fr; gap: 1rem; }
+    }
+
+    /* ── POLICYLENS HEALTH VISUAL ── */
+    .pv-health {
+      background: linear-gradient(135deg, #0a1628 0%, #0f2040 60%, #0a2a2a 100%);
+    }
+
+    .health-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .health-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 201, 167, 0.2);
+      animation: healthPulse 4s ease-in-out infinite;
+    }
+
+    .health-ring--outer {
+      width: 120px;
+      height: 120px;
+      animation-delay: 0s;
+    }
+
+    .health-ring--inner {
+      width: 75px;
+      height: 75px;
+      animation-delay: 1s;
+      border-color: rgba(0, 201, 167, 0.35);
+    }
+
+    @keyframes healthPulse {
+      0%, 100% { transform: scale(1);     opacity: 0.6; }
+      50%       { transform: scale(1.08); opacity: 1;   }
+    }
+
+    .health-icon {
+      font-size: 1.75rem;
+      color: #00c9a7;
+      position: relative;
+      z-index: 2;
+      line-height: 1;
+    }
+
+    .health-tag {
+      position: absolute;
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: rgba(0, 201, 167, 0.7);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .ptag--ai {
+      background: rgba(0, 201, 167, 0.1);
+      border-color: rgba(0, 201, 167, 0.35);
+      color: #00a88a;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .btn.btn-sm { font-size: 0.75rem; padding: 0.5rem 1rem; }
+
+    /* ── ABOUT PORTRAIT ── */
+    .about-grid { position: relative; }
+
+    .about-grid > div { position: relative; z-index: 1; }
+
+    .about__portrait {
+      position: absolute;
+      right: -4rem;
+      bottom: 0;
+      width: 280px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .portrait__frame { position: relative; width: 100%; }
+
+    .portrait__img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 4px;
+      mask-image:
+        linear-gradient(to top,    transparent 0%, black 20%, black 80%, transparent 100%),
+        linear-gradient(to right,  transparent 0%, black 20%),
+        linear-gradient(to bottom, transparent 0%, black 20%);
+      mask-composite: intersect;
+      -webkit-mask-image:
+        linear-gradient(to top,    transparent 0%, black 20%, black 80%, transparent 100%),
+        linear-gradient(to right,  transparent 0%, black 20%),
+        linear-gradient(to bottom, transparent 0%, black 20%);
+      -webkit-mask-composite: source-in;
+      opacity: 0.18;
+      filter: grayscale(30%) contrast(1.1);
+    }
+
+    .portrait__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to left, transparent 0%, var(--paper-dark) 85%);
+      border-radius: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .about__portrait { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation — FR-06, FR-07, T-05, T-06 -->
-  <nav class="nav" aria-label="Main navigation">
-    <div class="nav__inner">
-      <a href="#hero" class="nav__logo">AS<span class="nav__logo-dot">.</span></a>
-      <ul class="nav__links" role="list">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact" class="nav__cta">Contact</a></li>
-      </ul>
-    </div>
+<!--
+  👋 hey. you found the source.
+  either you're a developer checking my work (respect)
+  or you're my professor grading this (hi professor).
+  the specs live in /specs if you want the full story.
+-->
+
+  <nav>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <a class="nav-logo" href="#top">Adam Soto</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#opinions">Opinions</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 
-  <!-- Hero Section — FR-01, CR-01, T-08 through T-15 -->
-  <section id="hero" class="hero">
-    <div class="hero__bg" aria-hidden="true"></div>
-    <div class="hero__inner">
-
-      <div class="hero__text">
-        <p class="hero__eyebrow animate-fadeup" style="--delay: 0s">
-          <span class="eyebrow__line" aria-hidden="true"></span>
-          Applied AI Engineering Student
-        </p>
-        <h1 class="hero__name animate-fadeup" style="--delay: 0.15s">
-          Adam <em>Soto</em>
-        </h1>
-        <p class="hero__subtitle animate-fadeup" style="--delay: 0.3s">
-          I build data tools that make the complex feel simple — now with AI.
-        </p>
-        <p class="hero__statement animate-fadeup" style="--delay: 0.45s">
-          From economic dashboards to AI-powered insight engines, I turn messy datasets
-          into interfaces people actually want to use.
-        </p>
-        <div class="hero__ctas animate-fadeup" style="--delay: 0.6s">
-          <a href="#projects" class="btn btn--primary">View My Work</a>
-          <a href="https://github.com/Adam-H-Soto" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
-            GitHub Profile
-          </a>
-        </div>
-      </div>
-
-      <!-- Decorative data viz card — T-14 -->
-      <div class="hero__visual animate-fadein" style="--delay: 0.8s" aria-hidden="true">
-        <div class="viz-card">
-          <div class="viz-card__header">
-            <span class="viz-card__label">USA Standard of Living</span>
-            <span class="viz-card__pulse"></span>
-          </div>
-          <div class="viz-card__chart">
-            <div class="chart-bars">
-              <div class="chart-bar" style="--h: 55%"><span>CA</span></div>
-              <div class="chart-bar" style="--h: 72%"><span>NY</span></div>
-              <div class="chart-bar" style="--h: 48%"><span>TX</span></div>
-              <div class="chart-bar" style="--h: 83%"><span>WA</span></div>
-              <div class="chart-bar" style="--h: 61%"><span>CO</span></div>
-              <div class="chart-bar chart-bar--highlight" style="--h: 90%"><span>MA</span></div>
-              <div class="chart-bar" style="--h: 44%"><span>FL</span></div>
-            </div>
-            <div class="chart-metric">
-              <span class="chart-metric__value">50</span>
-              <span class="chart-metric__label">States Mapped</span>
-            </div>
-          </div>
-          <div class="viz-card__footer">
-            <span class="viz-tag">Python</span>
-            <span class="viz-tag">AI</span>
-            <span class="viz-tag">D3</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- About Section — FR-02, CR-02, T-16 through T-18 -->
-  <section id="about" class="about">
-    <div class="section__inner">
-      <div class="about__grid">
-
-        <div class="about__left">
-          <p class="section__eyebrow">
-            <span class="eyebrow__line" aria-hidden="true"></span>
-            About
-          </p>
-          <h2 class="section__heading">Builder.<br>Analyst.<br>Always curious.</h2>
-          <div class="about__stats">
-            <div class="stat-tile">
-              <span class="stat-tile__number">2</span>
-              <span class="stat-tile__label">Live Projects</span>
-            </div>
-            <div class="stat-tile">
-              <span class="stat-tile__number">50</span>
-              <span class="stat-tile__label">States Analyzed</span>
-            </div>
-            <div class="stat-tile">
-              <span class="stat-tile__number">AI</span>
-              <span class="stat-tile__label">First Approach</span>
-            </div>
-            <div class="stat-tile">
-              <span class="stat-tile__number">∞</span>
-              <span class="stat-tile__label">Datasets to Explore</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="about__right">
-          <p>
-            I'm an Applied AI Engineering student with a passion for turning raw, complex data
-            into tools that feel intuitive. My work sits at the intersection of data engineering,
-            AI integration, and interactive visualization — building things that not only work,
-            but communicate.
-          </p>
-          <p>
-            My current focus is on economic and public policy data: how do we take the sprawling
-            complexity of cost-of-living, income, and opportunity across the United States and
-            make it legible? The USA Standard of Living Explorer was my first answer to that
-            question. EconLens is the next one — AI-native from the ground up.
-          </p>
-          <p>
-            I'm looking for a junior role at a company that cares about the quality of its
-            data products. If you need someone who can wire a Python data pipeline to an AI API
-            and ship it as something a non-technical stakeholder can actually use — let's talk.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section — FR-03, FR-04, CR-03, CR-04, T-19 through T-26 -->
-  <section id="projects" class="projects">
-    <div class="section__inner">
-      <p class="section__eyebrow">
-        <span class="eyebrow__line" aria-hidden="true"></span>
-        Projects
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-left">
+      <span class="hero-tag">Applied AI Engineering</span>
+      <h1 class="hero-name">Adam<br><em>Soto.</em></h1>
+      <p class="hero-headline">
+        I build <strong>data tools and AI pipelines</strong> that turn messy,
+        overwhelming information into something a human can understand
+        in under ten seconds.
       </p>
-      <h2 class="section__heading">Things I've built.</h2>
+      <p class="hero-kicker">
+        // currently: at a computer &nbsp;·&nbsp; <span>ideally: not at a computer</span>
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-dark">See the work</a>
+        <a href="https://github.com/Adam-H-Soto" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">GitHub →</a>
+      </div>
+    </div>
 
-      <div class="projects__grid">
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="card-dot dot-live"></div>
+        <div class="card-label">Current project</div>
+        <div class="card-value">USA Standard of Living Explorer</div>
+        <div class="card-sub">Live on Vercel · 50 states mapped</div>
+      </div>
+      <div class="hero-card">
+        <div class="card-dot dot-wip"></div>
+        <div class="card-label">In development</div>
+        <div class="card-value">Solsticij — Digital Board Game</div>
+        <div class="card-sub">Unity · C# · 2D</div>
+      </div>
+      <div class="hero-card">
+        <div class="card-dot dot-wip"></div>
+        <div class="card-label">Upcoming</div>
+        <div class="card-value">University Hospital · Lead Tech Counselor</div>
+        <div class="card-sub">Internship June 2026 · CYO Summer 2026</div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Project 1: USA Standard of Living Explorer -->
-        <article class="project-card">
-          <div class="project-card__visual project-card__visual--teal" aria-hidden="true">
-            <div class="map-visual">
-              <div class="map-dot" style="top:35%;left:15%"></div>
-              <div class="map-dot map-dot--large" style="top:55%;left:25%"></div>
-              <div class="map-dot" style="top:25%;left:60%"></div>
-              <div class="map-dot map-dot--large map-dot--bright" style="top:20%;left:78%"></div>
-              <div class="map-dot" style="top:65%;left:50%"></div>
-              <div class="map-dot" style="top:45%;left:70%"></div>
-              <div class="map-dot map-dot--large" style="top:70%;left:80%"></div>
-              <div class="map-line" style="top:35%;left:15%;width:14%;transform:rotate(30deg)"></div>
-              <div class="map-line" style="top:25%;left:60%;width:20%;transform:rotate(-10deg)"></div>
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-wrap">
+      <div class="about-grid">
+        <div>
+          <p class="section-number">02 — About</p>
+          <h2 class="section-heading">Human first.<br>Engineer <em>second.</em></h2>
+          <div class="stat-cluster">
+            <div class="stat">
+              <div class="stat-num">50</div>
+              <div class="stat-label">States analyzed</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">0</div>
+              <div class="stat-label">AI projects started without a spec</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">∞</div>
+              <div class="stat-label">Opinions on chocolate</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3</div>
+              <div class="stat-label">Live Projects</div>
             </div>
           </div>
-          <div class="project-card__body">
-            <div class="project-card__meta">
-              <span class="project-badge project-badge--live">Live on Vercel</span>
+        </div>
+        <div class="about-body">
+          <p>
+            I'm studying <strong>Information Technology at NJIT</strong> (BS, Minor in
+            Mobile &amp; Web Development, expected May 2027) — Dean's Scholar, focused
+            on making complex data legible. Not pretty for the sake of it, but actually
+            useful in under ten seconds.
+          </p>
+          <p>
+            I treat engineering like engineering: every AI project starts with a
+            <strong>spec</strong> — requirements, design doc, and task list approved
+            before a single line of code. It keeps AI-assisted development intentional
+            rather than improvisational. The specs for this portfolio live in
+            <code style="font-family:'Azeret Mono',monospace;font-size:0.85em;">/specs</code>
+            if you want to see the receipts. My work sits at the intersection of Python
+            pipelines, LLM APIs, and the question <em>"okay but would a normal person
+            understand this?"</em>
+          </p>
+          <p>
+            Outside code, I lead. Three summers at CYO running teams, mentoring
+            counselors, coordinating 10–30 kids at a time — and this summer I'm stepping
+            up as <strong>Lead Technology Counselor</strong>. Starting June 2026 I'll also
+            be interning at <strong>University Hospital in Newark</strong>. I bring the
+            same energy to both: organized, accountable, <em>genuinely there.</em>
+          </p>
+          <p>
+            Looking for a junior role at a team building AI-powered data tools.
+            Ideally one where "let's try something weird" is acceptable in a meeting.
+          </p>
+        </div>
+        <div class="about__portrait" aria-hidden="true">
+          <div class="portrait__frame">
+            <img
+              src="OutsideTreePic.jpg"
+              alt="Adam Soto"
+              class="portrait__img"
+              loading="lazy"
+            />
+            <div class="portrait__overlay"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projects">
+    <div class="section-wrap">
+      <p class="section-number">03 — Projects</p>
+      <h2 class="section-heading">Things I've<br><em>actually shipped.</em></h2>
+      <div class="projects-grid">
+
+        <a class="project-card" href="https://student-reality-lab-soto.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <div class="project-visual pv-teal">
+            <div class="project-visual-inner">
+              <div class="mini-bars">
+                <div class="mini-bar"><span>CA</span></div>
+                <div class="mini-bar"><span>NY</span></div>
+                <div class="mini-bar"><span>TX</span></div>
+                <div class="mini-bar"><span>WA</span></div>
+                <div class="mini-bar"><span>CO</span></div>
+                <div class="mini-bar"><span>MA</span></div>
+                <div class="mini-bar"><span>FL</span></div>
+              </div>
             </div>
-            <h3 class="project-card__title">USA Standard of Living Explorer</h3>
-            <p class="project-card__desc">
-              An interactive data dashboard mapping cost-of-living, income, and quality-of-life
-              metrics across all 50 analyzed US states. Built to make dense economic data
-              scannable and comparable for everyday decision-making.
+            <span class="project-badge">Live ↗</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="ptag">Python</span>
+              <span class="ptag">Data Viz</span>
+              <span class="ptag">Interactive</span>
+              <span class="ptag">Vercel</span>
+            </div>
+            <h3 class="project-title">USA Standard of Living Explorer</h3>
+            <p class="project-desc">
+              State-by-state cost of living, wages, and quality of life — navigable,
+              comparable, and designed so a person can actually form an opinion in one sitting.
+              Because data that requires a PhD to read isn't useful data.
             </p>
-            <div class="project-card__tags">
-              <span class="tag">Python</span>
-              <span class="tag">Data Viz</span>
-              <span class="tag">Vercel</span>
-              <span class="tag">Interactive</span>
-            </div>
-            <a href="https://student-reality-lab-soto.vercel.app/" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
-              View Live Project
-            </a>
+            <span class="project-link">View live project →</span>
           </div>
-        </article>
+          <div class="project-quip">// 50 states. 0 spreadsheets required.</div>
+        </a>
 
-        <!-- Project 2: EconLens -->
-        <article class="project-card">
-          <div class="project-card__visual project-card__visual--dark" aria-hidden="true">
-            <div class="network-visual">
-              <div class="node node--center"></div>
-              <div class="node" style="top:20%;left:20%"></div>
-              <div class="node" style="top:15%;left:65%"></div>
-              <div class="node" style="top:70%;left:15%"></div>
-              <div class="node node--bright" style="top:65%;left:70%"></div>
-              <div class="node" style="top:45%;left:82%"></div>
-              <svg class="network-edges" aria-hidden="true">
-                <line x1="50%" y1="50%" x2="20%" y2="20%" />
-                <line x1="50%" y1="50%" x2="65%" y2="15%" />
-                <line x1="50%" y1="50%" x2="15%" y2="70%" />
-                <line x1="50%" y1="50%" x2="70%" y2="65%" />
-                <line x1="50%" y1="50%" x2="82%" y2="45%" />
-              </svg>
+        <div class="project-card">
+          <div class="project-visual pv-dark">
+            <div class="project-visual-inner">
+              <div class="mini-network">
+                <div class="net-node hub"></div>
+                <div class="net-node s" style="top:15%;left:20%"></div>
+                <div class="net-node s" style="top:20%;left:75%"></div>
+                <div class="net-node s" style="top:78%;left:18%"></div>
+                <div class="net-node s" style="top:80%;left:72%"></div>
+                <div class="net-node s" style="top:45%;left:88%"></div>
+              </div>
             </div>
+            <span class="project-badge">In dev</span>
           </div>
-          <div class="project-card__body">
-            <div class="project-card__meta">
-              <span class="project-badge project-badge--dev">In Development</span>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="ptag">Unity</span>
+              <span class="ptag">C#</span>
+              <span class="ptag">2D</span>
+              <span class="ptag">Board Game</span>
             </div>
-            <h3 class="project-card__title">EconLens</h3>
-            <p class="project-card__desc">
-              An AI-powered economic insight tool that lets users query, compare, and interpret
-              macroeconomic data in plain language. Connects live datasets to a Claude-backed
-              reasoning layer — ask a question, get an answer with sources.
+            <h3 class="project-title">Solsticij</h3>
+            <p class="project-desc">
+              A 2D digital board game where the four seasons wage a turf war across
+              15 rounds — claiming tiles, placing stakes, and fighting for the most
+              territory. Built in Unity with C#. Spring is not to be trusted.
             </p>
-            <div class="project-card__tags">
-              <span class="tag">Claude API</span>
-              <span class="tag">Python</span>
-              <span class="tag">AI</span>
-              <span class="tag">Economics</span>
-            </div>
-            <span class="btn btn--outline btn--sm btn--disabled" aria-disabled="true">Coming Soon</span>
+            <span class="project-link muted">Coming soon</span>
           </div>
-        </article>
+          <div class="project-quip">// 4 seasons. 1 board. 0 mercy.</div>
+        </div>
+
+        <!-- Project 3: PolicyLens -->
+        <div class="project-card">
+          <div class="project-visual pv-health">
+            <div class="project-visual-inner">
+              <div class="health-visual">
+                <div class="health-ring health-ring--outer"></div>
+                <div class="health-ring health-ring--inner"></div>
+                <div class="health-icon">⬡</div>
+                <div class="health-tag" style="top:18%;left:12%">RAG</div>
+                <div class="health-tag" style="top:65%;left:8%">GPT-4o</div>
+                <div class="health-tag" style="top:18%;right:10%">FastAPI</div>
+                <div class="health-tag" style="top:65%;right:6%">ChromaDB</div>
+              </div>
+            </div>
+            <span class="project-badge">Live ↗</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="ptag ptag--ai">AI-Powered</span>
+              <span class="ptag">Python</span>
+              <span class="ptag">FastAPI</span>
+              <span class="ptag">RAG</span>
+              <span class="ptag">OpenAI</span>
+              <span class="ptag">React</span>
+              <span class="ptag">ChromaDB</span>
+            </div>
+            <h3 class="project-title">PolicyLens</h3>
+            <p class="project-desc">
+              An AI-powered web app that makes health insurance policies understandable.
+              Upload any policy PDF — GPT-4o extracts structured coverage data instantly,
+              then a RAG pipeline lets you ask plain-language questions and get grounded
+              answers with source citations.
+            </p>
+            <div class="project-actions">
+              <a href="https://is-219-finalp2-ahs72.vercel.app" class="btn btn-dark btn-sm"
+                 target="_blank" rel="noopener noreferrer">View Live Project</a>
+              <a href="https://github.com/Adam-H-Soto" class="btn btn-ghost btn-sm"
+                 target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+            </div>
+          </div>
+          <div class="project-quip">// GPT-4o reads your policy so you don't have to.</div>
+        </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Skills Section — FR-04, FR-05, CR-05, T-27 through T-30 -->
-  <section id="skills" class="skills">
-    <div class="section__inner">
-      <p class="section__eyebrow section__eyebrow--light">
-        <span class="eyebrow__line eyebrow__line--light" aria-hidden="true"></span>
-        Skills
-      </p>
-      <h2 class="section__heading section__heading--light">What I work with.</h2>
+  <!-- OPINIONS -->
+  <section class="opinions" id="opinions">
+    <div class="section-wrap">
+      <p class="section-number">04 — Unprompted</p>
+      <h2 class="section-heading">Things I believe<br><em>strongly.</em></h2>
+      <p class="opinions-intro">// not on my resume. very much on my mind.</p>
+      <div class="opinion-list">
 
-      <div class="skills__grid">
+        <div class="opinion-item">
+          <span class="opinion-num">01</span>
+          <div>
+            <p class="opinion-text">Being nonchalant is a waste of a perfectly good emotion.</p>
+            <p class="opinion-aside">// we have so many of them. why suppress them.</p>
+          </div>
+        </div>
 
+        <div class="opinion-item">
+          <span class="opinion-num">02</span>
+          <div>
+            <p class="opinion-text">One piece of chocolate a day is a health decision, not a treat.</p>
+            <p class="opinion-aside">// Polish proverb from my region. this is non-negotiable.</p>
+          </div>
+        </div>
+
+        <div class="opinion-item">
+          <span class="opinion-num">03</span>
+          <div>
+            <p class="opinion-text">I love technology. I also love not being near it. The world is large and a screen is very small.</p>
+            <p class="opinion-aside">// yes, I'm aware this is on an AI engineer's portfolio. I contain multitudes.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <div class="section-wrap">
+      <p class="section-number">05 — Skills</p>
+      <h2 class="section-heading">What I work<br><em>with.</em></h2>
+      <div class="skills-grid">
         <div class="skill-group">
-          <h3 class="skill-group__title">Languages &amp; Data</h3>
-          <ul class="skill-group__list" role="list">
+          <p class="skill-group-title">Languages & Data</p>
+          <ul class="skill-list">
             <li>Python</li>
-            <li>SQL</li>
-            <li>JavaScript</li>
             <li>HTML / CSS</li>
-            <li>Pandas &amp; NumPy</li>
+            <li>SQL / SQL Server</li>
+            <li>JavaScript</li>
+            <li>PHP</li>
+            <li>Java</li>
           </ul>
         </div>
-
         <div class="skill-group">
-          <h3 class="skill-group__title">AI &amp; ML Tools</h3>
-          <ul class="skill-group__list" role="list">
+          <p class="skill-group-title">Frameworks & Tools</p>
+          <ul class="skill-list">
+            <li>Django</li>
+            <li>pandas / NumPy</li>
+            <li>MS Access</li>
+            <li>LangChain</li>
+            <li>RabbitMQ (learning)</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-title">AI & Deployment</p>
+          <ul class="skill-list">
             <li>Claude API (Anthropic)</li>
             <li>OpenAI API</li>
             <li>Prompt Engineering</li>
             <li>RAG Pipelines</li>
-            <li>LangChain</li>
+            <li>GitHub / Git</li>
+            <li>Vercel / GitHub Pages</li>
           </ul>
         </div>
-
-        <div class="skill-group">
-          <h3 class="skill-group__title">Deployment &amp; Tooling</h3>
-          <ul class="skill-group__list" role="list">
-            <li>Vercel</li>
-            <li>GitHub Pages</li>
-            <li>Git &amp; GitHub</li>
-            <li>VS Code + Claude Code</li>
-            <li>REST APIs</li>
-          </ul>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Contact Section — FR-05, FR-08, FR-09, T-31 through T-35 -->
-  <section id="contact" class="contact">
-    <div class="section__inner section__inner--narrow">
-      <p class="section__eyebrow">
-        <span class="eyebrow__line" aria-hidden="true"></span>
-        Contact
-      </p>
-      <h2 class="section__heading">Let's build something.</h2>
-      <p class="contact__statement">
-        <em>I'm actively looking for junior AI/data engineering roles. If you're building
-        something interesting with data or AI, I'd genuinely love to hear about it.</em>
-      </p>
-      <div class="contact__links">
-        <a href="https://github.com/Adam-H-Soto" class="btn btn--primary btn--lg" target="_blank" rel="noopener noreferrer">
-          View GitHub Profile
-        </a>
-        <a href="https://www.linkedin.com/in/adam-soto-909586327/" class="btn btn--outline btn--lg" target="_blank" rel="noopener noreferrer">
-          Connect on LinkedIn
-        </a>
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-wrap">
+      <p class="section-number">06 — Contact</p>
+      <h2 class="section-heading">Let's build<br><em>something.</em></h2>
+      <div class="contact-inner">
+        <p class="contact-statement">
+          I'm looking for junior AI/data engineering roles at teams that care about
+          the quality of their tools — and don't mind someone who shows up genuinely
+          excited about the work.
+        </p>
+        <div class="contact-links">
+          <a href="https://github.com/Adam-H-Soto" target="_blank" rel="noopener noreferrer" class="btn btn-dark">GitHub Profile</a>
+          <a href="https://www.linkedin.com/in/adam-soto-909586327/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">LinkedIn →</a>
+          <a href="mailto:ahs72@njit.edu" class="btn btn-ghost">Email →</a>
+        </div>
+        <p class="contact-irony">
+          // I will respond promptly.<br>
+          // I will also, at some point, go outside afterward.<br>
+          // <span>This is healthy. I recommend it.</span>
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Footer — CR-06, T-36 -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <span class="footer__name">Adam Soto</span>
-      <span class="footer__tagline">Applied AI Engineering · 2026
-      </span>
-    </div>
+  <footer>
+    <span class="footer-name">Adam Soto</span>
+    <span class="footer-mono">Applied AI Engineering · 2026 · currently: probably outside</span>
   </footer>
+
+  <script>
+    // ── CONSOLE EASTER EGG ──
+    console.log('%c Hey.', 'font-size:1.5rem; font-weight:bold; color:#3aaa6e; font-family:serif;');
+    console.log('%c You opened the console. Respect.', 'font-size:0.9rem; color:#4a4038;');
+    console.log('%c If you\'re hiring — find me on LinkedIn or GitHub.', 'font-size:0.85rem; color:#3aaa6e; font-style:italic;');
+    console.log('%c If you\'re my professor — the specs are in /specs. Hi.', 'font-size:0.8rem; color:#9a8f85;');
+    console.log('%c (also: one piece of chocolate a day. trust me.)', 'font-size:0.75rem; color:#3aaa6e; font-style:italic;');
+
+    // ── SCROLL PROGRESS BAR ──
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      progressBar.style.width = `${Math.min(pct * 100, 100)}%`;
+    }, { passive: true });
+
+    // ── SCROLL REVEALS ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const delay = parseInt(entry.target.dataset.delay || 0);
+        setTimeout(() => entry.target.classList.add('revealed'), delay);
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.12 });
+
+    function revealEls(selector, baseDelay = 0, stagger = 0) {
+      document.querySelectorAll(selector).forEach((el, i) => {
+        el.classList.add('reveal');
+        el.dataset.delay = baseDelay + i * stagger;
+        revealObserver.observe(el);
+      });
+    }
+
+    // Section labels + headings
+    revealEls('.about .section-number, .projects .section-number, .opinions .section-number, .skills .section-number, .contact .section-number');
+    revealEls('.about .section-heading, .projects .section-heading, .opinions .section-heading, .skills .section-heading, .contact .section-heading', 100);
+
+    // About
+    revealEls('.stat', 0, 130);
+    revealEls('.about-body p', 0, 100);
+
+    // Projects
+    revealEls('.project-card', 0, 180);
+
+    // Opinions
+    revealEls('.opinion-item', 0, 140);
+
+    // Skills
+    revealEls('.skill-group', 0, 150);
+
+    // Contact
+    revealEls('.contact-statement', 0);
+    revealEls('.contact-links', 120);
+    revealEls('.contact-irony', 220);
+
+    // ── STAT COUNTUP ──
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const numEl = entry.target.querySelector('.stat-num');
+        if (!numEl) return;
+        const raw = numEl.textContent.trim();
+        const target = parseFloat(raw);
+        if (isNaN(target) || target === 0) return;
+        const isDecimal = raw.includes('.');
+        const duration = 1400;
+        let startTs = null;
+        const tick = (ts) => {
+          if (!startTs) startTs = ts;
+          const p = Math.min((ts - startTs) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          numEl.textContent = isDecimal
+            ? (eased * target).toFixed(2)
+            : Math.floor(eased * target);
+          if (p < 1) requestAnimationFrame(tick);
+          else numEl.textContent = raw;
+        };
+        requestAnimationFrame(tick);
+        countObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat').forEach(el => countObserver.observe(el));
+  </script>
 
 </body>
 </html>
